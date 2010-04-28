@@ -48,7 +48,7 @@ class Directory(models.Model):
 class Database(models.Model):
     client = models.ForeignKey(Client)
     db_name = models.CharField(_("Database Name"), max_length=255, default="")
-    username = models.CharField(_("Datause Username"), max_length=255, default="")
+    username = models.CharField(_("Database Username"), max_length=255, default="")
     password = models.CharField(_("Database Password"), max_length=255, default="")
 
     def __unicode__(self):
