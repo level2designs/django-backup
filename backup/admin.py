@@ -52,7 +52,7 @@ admin.site.register(Database, DatabaseAdmin)
 class BackupJobAdmin(admin.ModelAdmin):
     actions = ['run_selected_jobs']
     
-    list_display = ('backup_server', 'client', 'frequency', 'get_timeuntil', 'last_run', 'last_run_successful', 'is_running', 'run_button')
+    list_display = ('client', 'backup_server', 'frequency', 'get_timeuntil', 'last_run', 'last_run_successful', 'is_running', 'run_button')
     list_filter = ('last_run_successful', 'frequency', 'disabled')
     filter_horizontal = ('subscribers', 'databases', 'directories')
     fieldsets = (
