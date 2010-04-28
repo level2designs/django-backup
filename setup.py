@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='django-backup',
-    version='0.2',
+    version='0.1',
     license='BSD',
     description='A Way to Run Remote Backups Through the Django Admin',
     author='Adam Miskiewicz',
