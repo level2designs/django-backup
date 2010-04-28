@@ -1,0 +1,10 @@
+Introduction
+============
+
+At Level2, we needed a way to simply manage backups.  I didn't want to write shell scripts for every server I needed to backup, so I wrote this little web admin.
+
+It uses rdiff-backup to mirror directories across a network.
+
+Backup tasks can be created and then scheduled to run at certain intervals.  Backup tasks can include directories (which are done using rdiff-backup) and MySQL databases (which are done by dumping the db into a sql file in a folder, and then running rdiff-backup on that folder)
+
+There's lots to do.  Lots to improve on.  Stay tuned.
