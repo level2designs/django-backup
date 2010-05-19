@@ -4,6 +4,8 @@ from django.conf import settings
 from django.utils.timesince import timeuntil
 from django.utils.translation import ungettext, ugettext, ugettext_lazy as _
 
+from django.template import loader, Context
+
 from backup.utils import *
 
 import os
@@ -204,7 +206,7 @@ class BackupJob(models.Model):
         self.last_run_successful = True
         self.is_running = False
         self.pid = None
-        self.last_run = run_date
+        self.last_run = run_date        
         
         # If this was a forced run, then don't update the
         # next_run date
@@ -212,6 +214,25 @@ class BackupJob(models.Model):
             self.force_run = False
         else:
             self.next_run = self.rrule.after(run_date)
+            
+        ## Send email        
+        t_text = loader.get_template('email/backup_complete.txt')
+        t_html = loader.get_template('email/backup_complete.html')
+
+        c = Context({
+            "job": self
+        })
+
+        from django.core.mail import send_mail
+        from django.core.mail import EmailMultiAlternatives
+
+        subject, from_email, to = '[LEVEL2BACKUP] Backup of %s on %s Complete!' % (self.client.name, self.backup_server.name), 'Level2Backup <no-reply@level2designs.com>', [sub.email for sub in self.subscribers.all()]
+        text_content = t_text.render(c)
+        html_content = t_html.render(c)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+    
         self.save()
         
     def check_is_running(self):

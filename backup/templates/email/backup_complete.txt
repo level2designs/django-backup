@@ -1,0 +1,15 @@
+-------------
+Backup Report
+-------------
+
+Backup of {{ job.client.name }} on {{ job.backup_server.name }} Has Completed At {{ job.last_run }}
+
+Next Run: {{ job.next_run }}
+
+Directories Backed Up:
+----------------------
+    {% for directory in job.directories.all %}* {{ directory.path }}{% endfor %}
+
+Databases Backed Up:
+--------------------
+    {% for database in job.databases.all %}* {{ database.db_name }}{% endfor %}

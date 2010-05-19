@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>{% block page_title %}{% endblock page_title %}</title>
+	<style type="text/css">
+	html, body {
+	    font:14px "Helvetica", "Arial", sans-serif;
+	}
+    
+    h1, h2, h3, h4 { line-height: 1.5em; }
+    
+    .red { color:red; }
+    .green { color:green; }
+	</style>
+</head>
+<body>
+{% block content %}{% endblock content %}
+</body>
+</html>

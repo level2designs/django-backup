@@ -1,0 +1,27 @@
+{% extends "email/base.html" %}
+
+{% block page_title %}{{ subject }}{% endblock page_title %}
+
+{% block content %}
+
+<h1>Backup Report</h1>
+
+<h2>Backup of <span class="green">{{ job.client.name }}</span> on <span class="red">{{ job.backup_server.name }}</span> Has <span class="green">Completed</span> At <span class="red">{{ job.last_run }}</span></h2>
+
+<h3><b>Next Run: </b>{{ job.next_run }}</h3>
+
+<h4>Directories Backed Up:</h3>
+<ul>
+    {% for directory in job.directories.all %}
+    <li>{{ directory.path }}</li>
+    {% endfor %}
+</ul>
+
+<h4>Databases Backed Up:</h3>
+<ul>
+    {% for database in job.databases.all %}
+    <li>{{ database.db_name }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
